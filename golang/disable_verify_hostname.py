@@ -3,6 +3,7 @@ import sys
 
 # e.g. "dockerd"
 process = sys.argv[1]
+debug = True
 
 session = frida.attach(process)
 
@@ -16,13 +17,15 @@ script = session.create_script("""
         }
         Interceptor.attach(verifyHostname, {
             onEnter(args) {
-                send(this.context.rbx.readUtf8String(this.context.rcx.toInt32()));
+                if (%s) {
+                    send(this.context.rbx.readUtf8String(this.context.rcx.toInt32()));
+                }
             },
             onLeave(retval) {
                 retval.replace(0);
             }
         })
-""")
+""" % "true" if debug else "false")
 
 def on_message(message, data):
     print(message)
