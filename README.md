@@ -8,6 +8,7 @@ for reverse engineering applications.
 Tools for poking about in the internals of android app.
 
 * [ble.js](./android/ble.js) [Frida](https://frida.re) script for monitoring BLE comms.
+  * see [./android/ble-reversing-non-rooted-android.md](./android/ble-reversing-non-rooted-android.md) for an example of reverse engineering a BLE control protocol
 
 ## [golang](./golang)
 
